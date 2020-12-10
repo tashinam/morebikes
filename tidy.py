@@ -16,7 +16,7 @@ for f in all_files:
 
     # Drop precipidation column as all 0s
     print(f"Precipitation column is all 0s. Removing...")
-    df.drop("precipitation.l.m2", axis=1)
+    df.drop("precipitation.l.m2", axis=1, inplace=True)
 
     # Save tided file to processed directory
     new_file = os.path.join('Processed', f'{os.path.basename(f)}')
