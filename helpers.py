@@ -4,11 +4,27 @@ import os
 import numpy as np
 import pandas as pd
 import sklearn
+from sklearn.base import TransformerMixin
 from sklearn.model_selection import cross_val_score, KFold
 
 def load_all_processed_data():
     all_files = all_files = glob.glob(os.path.join('Processed', '*.csv'))
     return pd.concat((pd.read_csv(f) for f in all_files), ignore_index=True)
+
+class ManualFeatureSelector(TransformerMixin):
+    """
+    Transformer for manual selection of features using sklearn style transform method.
+    """
+
+    def __init__(self, features):
+        self.features = features
+        pass
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        return X[self.features]
 
 class Baseline(sklearn.base.BaseEstimator):
     def __init__(self, column):
