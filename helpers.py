@@ -11,6 +11,14 @@ def load_all_processed_data():
     all_files = glob.glob(os.path.join('Processed', '*.csv'))
     return pd.concat((pd.read_csv(f) for f in all_files), ignore_index=True)
 
+def load_all_phase2_data():
+    all_files = glob.glob(os.path.join('Processed/phase2', 'phase_2_station_*.csv'))
+    return pd.concat((pd.read_csv(f) for f in all_files), ignore_index=True)
+
+def load_all_phase3_data():
+    all_files = glob.glob(os.path.join('Processed/phase3', 'phase_3_station_*.csv'))
+    return pd.concat((pd.read_csv(f) for f in all_files), ignore_index=True)
+
 class ManualFeatureSelector(TransformerMixin):
     """
     Transformer for manual selection of features using sklearn style transform method.
@@ -50,3 +58,6 @@ def per_station_models_cross_val_mean(regr, df):
 
     return cross_val_group_mean(regr, per_station_groups)
 
+phase2_modelled_stations = np.arange(1, 201)
+phase2_model_types = ['full_temp', 'full', 'short_full_temp', 'short_full', 'short_temp', 'short']
+phase2_model_names = [f'model_station_{station_id}_rlm_{model_type}' for station_id in modelled_stations for model_type in model_types]
