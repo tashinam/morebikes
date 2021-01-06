@@ -11,6 +11,14 @@ def load_all_processed_data():
     all_files = glob.glob(os.path.join('Processed', '*.csv'))
     return pd.concat((pd.read_csv(f) for f in all_files), ignore_index=True)
 
+def load_all_phase2_data():
+    all_files = glob.glob(os.path.join('Processed/phase2', 'phase_2_station_*.csv'))
+    return pd.concat((pd.read_csv(f) for f in all_files), ignore_index=True)
+
+def load_all_phase3_data():
+    all_files = glob.glob(os.path.join('Processed/phase3', 'phase_3_station_*.csv'))
+    return pd.concat((pd.read_csv(f) for f in all_files), ignore_index=True)
+
 class ManualFeatureSelector(TransformerMixin):
     """
     Transformer for manual selection of features using sklearn style transform method.
