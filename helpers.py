@@ -50,3 +50,4 @@ def per_station_models_cross_val_mean(regr, df):
 
     return cross_val_group_mean(regr, per_station_groups)
 
+def scores
